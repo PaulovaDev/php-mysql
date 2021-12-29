@@ -4,11 +4,22 @@ require ('Connection.php');
 
 class Repository 
 {
-    public function FetchAllFromProduct()
+    public function FetchDataFromProduct(int $id)
     {
         global $conn;
 
-        $stmt = $conn->prepare("SELECT id, nombre, nombre_corto, descripcion, pvp, familia FROM productos");
+        $stmt = $conn->prepare("SELECT id, nombre, nombre_corto, descripcion, pvp, familia FROM productos WHERE id=:id");
+        $stmt->execute([':id' => $id]); 
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $products;
+    }
+
+    public function FetchIdAndNameFromProduct()
+    {
+        global $conn;
+
+        $stmt = $conn->prepare("SELECT id, nombre FROM productos");
         $stmt->execute(); 
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

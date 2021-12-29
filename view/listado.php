@@ -3,7 +3,7 @@
 require ('../Repository.php');
 
 $fetch = new Repository();
-$results = $fetch->FetchAllFromProduct();
+$results = $fetch->FetchIdAndNameFromProduct();
 
 
 ?>
@@ -49,7 +49,7 @@ $results = $fetch->FetchAllFromProduct();
                         <td> <?= $result['id']; ?> </td>
                         <td> <?= $result['nombre']; ?> </td>
                         <td>
-                            <button type="button" onclick="window.location.href='actualizar.php'" class="btn btn-outline-warning">Actualizar</button>
+                            <button type="button" onclick="window.location.href='actualizar.php?id=<?php echo $result['id']; ?>'" class="btn btn-outline-warning">Actualizar</button>
                             <button type="button" onclick="window.location.href='borrar.php'" class="btn btn-outline-danger">Borrar</button>
                         </td>
                     </tr>

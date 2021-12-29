@@ -2,14 +2,17 @@
 
 require ('../Repository.php');
 
+$id = (intval($_GET['id']));
+
 $repository = new Repository();
-$products = $repository->FetchAllFromProduct();
+$fetchFamilies = $repository->FetchAllFromFamily();
+
+$products = $repository->FetchDataFromProduct($id);
+
 
 foreach ($products as $product) {
-
+    $product;
 }
-
-var_dump($product);
 
 ?>
 
@@ -33,24 +36,24 @@ var_dump($product);
 
     <form class="mx-auto" style="width: 900px;" action="actualizarLogica.php" method="GET">
 
-        <input type='hidden' name='id' value='<?php $product['id'] ?>'>
+        <input type='hidden' name='id' value='<?php $id=$_GET['id']; ?>'>
     
         <div class="mt-5 mb-3">
             <label for="name">Nombre</label>
-            <input type="text" name="nombre" placeholder="Nombre">
+            <input type="text" name="nombre" placeholder="Nombre" value="<?php echo $product['nombre'] ?>">
 
             <label for="short_name" class="ml-5">Nombre corto</label>
-            <input type="text" name="nombre_corto" placeholder="Nombre corto">
+            <input type="text" name="nombre_corto" placeholder="Nombre corto" value="<?php echo $product['nombre_corto'] ?>">
         </div>
-
+        
         <div class="mb-3">
             <label for="price">Precio (€)</label>
-            <input type="float" name="pvp" placeholder="Precio (€)">
+            <input type="float" name="pvp" placeholder="Precio (€)" value="<?php echo $product['pvp'] ?>">
 
             <label for="family" class="ml-5">Familia</label>
             <select name="familia" id="family">
                 <?php foreach ($fetchFamilies as $family): ?>
-                    <option value="<?php echo $family['cod'] ?>;">
+                    <option value="<?php echo $family['cod'] ?>;" >
                         <?php echo $family['nombre']; ?>
                     </option>
                 <?php endforeach; ?>
@@ -59,7 +62,7 @@ var_dump($product);
 
         <div class="mb-3">
             <label for="description">Descripción</label>
-            <textarea name="descripcion" rows="10" cols="40"></textarea>
+            <textarea name="descripcion" rows="10" cols="40"value="<?php echo $product['descripcion'] ?>"><?php echo $product['descripcion'] ?></textarea>
         </div>
 
         <div class="mb-3 text-center">
