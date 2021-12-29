@@ -1,10 +1,9 @@
 <?php
 
-require ('../Query.php');
+require ('../Repository.php');
 
-$fetch = new Query();
-$families = $fetch->FetchAllFromFamily();
-
+$repository = new Repository();
+$fetchFamilies = $repository->FetchAllFromFamily();
 
 ?>
 
@@ -26,31 +25,43 @@ $families = $fetch->FetchAllFromFamily();
         <h1 class="text-center">Crear producto</h1>
     </header>
 
-    <form class="mx-auto" style="width: 900px;">
+    <form class="mx-auto" style="width: 900px;" action="crearLogica.php" method="POST">
         <div class="mt-5 mb-3">
             <label for="name">Nombre</label>
-            <input type="text" name="name">
+            <input type="text" name="nombre" placeholder="Nombre">
 
             <label for="short_name" class="ml-5">Nombre corto</label>
-            <input type="text" name="short_name">
+            <input type="text" name="nombre_corto" placeholder="Nombre corto">
         </div>
+
         <div class="mb-3">
             <label for="price">Precio (€)</label>
-            <input type="float" name="price">
+            <input type="float" name="pvp" placeholder="Precio (€)">
 
             <label for="family" class="ml-5">Familia</label>
-            <select name="family" id="family">
-                <?php foreach ($families as $family): ?>
+            <select name="familia" id="family">
+                <?php foreach ($fetchFamilies as $family): ?>
                     <option value="<?php echo $family['cod'] ?>;">
                         <?php echo $family['nombre']; ?>
                     </option>
                 <?php endforeach; ?>
             </select>
         </div>
+
         <div class="mb-3">
             <label for="description">Descripción</label>
-            <textarea name="description" rows="10" cols="40"></textarea>
+            <textarea name="descripcion" rows="10" cols="40"></textarea>
+        </div>
+
+        <div class="mb-3 text-center">
+            <input type="submit" class="btn btn-outline-success mr-5" value="Crear"></input>
+
+            <input type="reset" onclick="window.location.href='borrar.php'" class="btn btn-outline-danger mr-5" value="Limpiar"></input>
+
+            <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
         </div>
     </form>
+
+
 </body>
 </html>
