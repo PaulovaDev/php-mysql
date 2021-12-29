@@ -1,8 +1,12 @@
 <?php
 
-require ('../Repository.php');
+require ('../repository/Repository.php');
 
-$id = (intval($_GET['id']));
+$id = $_GET['id'];
+
+if ((isset($id)) == false) {
+    header('Location:listado.php');
+}
 
 $repository = new Repository();
 $fetchFamilies = $repository->FetchAllFromFamily();
@@ -34,13 +38,13 @@ foreach ($products as $product) {
         <h1 class="text-center">Actualizar producto</h1>
     </header>
 
-    <form class="mx-auto" style="width: 900px;" action="actualizarLogica.php" method="GET">
+    <form class="mx-auto" style="width: 800px;" action="actualizarLogica.php" method="POST">
 
         <input type='hidden' name='id' value='<?php $id=$_GET['id']; ?>'>
     
         <div class="mt-5 mb-3">
             <label for="name">Nombre</label>
-            <input type="text" name="nombre" placeholder="Nombre" value="<?php echo $product['nombre'] ?>">
+            <input type="text" name="nombre" placeholder="Nombre" class="ml-3" value="<?php echo $product['nombre'] ?>">
 
             <label for="short_name" class="ml-5">Nombre corto</label>
             <input type="text" name="nombre_corto" placeholder="Nombre corto" value="<?php echo $product['nombre_corto'] ?>">
@@ -48,12 +52,13 @@ foreach ($products as $product) {
         
         <div class="mb-3">
             <label for="price">Precio (€)</label>
-            <input type="float" name="pvp" placeholder="Precio (€)" value="<?php echo $product['pvp'] ?>">
+            <input type="float" name="pvp" placeholder="Precio (€)" class="ml-2" value="<?php echo $product['pvp'] ?>">
 
             <label for="family" class="ml-5">Familia</label>
-            <select name="familia" id="family">
+            <select name="familia" id="family" class="ml-2">
                 <?php foreach ($fetchFamilies as $family): ?>
-                    <option value="<?php echo $family['cod'] ?>;" >
+                    <option value="<?php echo $family['cod'] ?>;"
+                        <?php if ($family['cod'] === $product['familia']):?> selected <?php endif; ?>>
                         <?php echo $family['nombre']; ?>
                     </option>
                 <?php endforeach; ?>
@@ -61,19 +66,16 @@ foreach ($products as $product) {
         </div>
 
         <div class="mb-3">
-            <label for="description">Descripción</label>
-            <textarea name="descripcion" rows="10" cols="40"value="<?php echo $product['descripcion'] ?>"><?php echo $product['descripcion'] ?></textarea>
+            <label for="description">Descripción</label> <br>
+            <textarea name="descripcion" rows="5" cols="80" value="<?php echo $product['descripcion'] ?>"><?php echo $product['descripcion'] ?></textarea>
         </div>
 
         <div class="mb-3 text-center">
-            <input type="submit" class="btn btn-outline-success mr-5" value="Crear"></input>
-
-            <input type="reset" onclick="window.location.href='borrar.php'" class="btn btn-outline-danger mr-5" value="Limpiar"></input>
+            <input type="submit" onclick="window.location.href='actualizarLogica.php?id=<?php echo $result['id']; ?>'" class="btn btn-outline-success mr-5" value="Modificar"></input>
 
             <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
         </div>
     </form>
-
 
 </body>
 </html>

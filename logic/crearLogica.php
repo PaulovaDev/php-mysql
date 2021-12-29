@@ -1,6 +1,6 @@
 <?php
 
-require ('../Repository.php');
+require ('../repository/Repository.php');
 
 $repository = new Repository();
 
@@ -15,4 +15,4 @@ if (isset($_POST["nombre"], $_POST["nombre_corto"], $_POST["descripcion"], $_POS
     $create = $repository->InsertProduct($name, $shortName, $description, $price, $family);
 }  
 
-header("Location: crear.php");
+header("Location: listado.php");

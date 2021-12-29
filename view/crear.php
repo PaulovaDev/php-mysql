@@ -1,6 +1,6 @@
 <?php
 
-require ('../Repository.php');
+require ('../repository/Repository.php');
 
 $repository = new Repository();
 $fetchFamilies = $repository->FetchAllFromFamily();
@@ -22,13 +22,13 @@ $fetchFamilies = $repository->FetchAllFromFamily();
 <body>
     
     <header>
-        <h1 class="text-center">Crear producto</h1>
+        <h1 class="text-center mt-5">Crear producto</h1>
     </header>
 
-    <form class="mx-auto" style="width: 900px;" action="crearLogica.php" method="POST">
+    <form class="mx-auto" style="width: 800px;" action="crearLogica.php" method="POST">
         <div class="mt-5 mb-3">
             <label for="name">Nombre</label>
-            <input type="text" name="nombre" placeholder="Nombre">
+            <input type="text" name="nombre" placeholder="Nombre" class="ml-3">
 
             <label for="short_name" class="ml-5">Nombre corto</label>
             <input type="text" name="nombre_corto" placeholder="Nombre corto">
@@ -36,10 +36,10 @@ $fetchFamilies = $repository->FetchAllFromFamily();
 
         <div class="mb-3">
             <label for="price">Precio (€)</label>
-            <input type="float" name="pvp" placeholder="Precio (€)">
+            <input type="float" name="pvp" placeholder="Precio (€)" class="ml-2">
 
             <label for="family" class="ml-5">Familia</label>
-            <select name="familia" id="family">
+            <select name="familia" id="family" class="ml-2">
                 <?php foreach ($fetchFamilies as $family): ?>
                     <option value="<?php echo $family['cod'] ?>;">
                         <?php echo $family['nombre']; ?>
@@ -49,14 +49,14 @@ $fetchFamilies = $repository->FetchAllFromFamily();
         </div>
 
         <div class="mb-3">
-            <label for="description">Descripción</label>
-            <textarea name="descripcion" rows="10" cols="40"></textarea>
+            <label for="description">Descripción</label> <br>
+            <textarea name="descripcion" rows="5" cols="80"></textarea>
         </div>
 
-        <div class="mb-3 text-center">
+        <div class="mt-3 text-center">
             <input type="submit" class="btn btn-outline-success mr-5" value="Crear"></input>
 
-            <input type="reset" onclick="window.location.href='borrar.php'" class="btn btn-outline-danger mr-5" value="Limpiar"></input>
+            <input type="reset" class="btn btn-outline-danger mr-5" value="Limpiar"></input>
 
             <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
         </div>
