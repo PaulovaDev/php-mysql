@@ -1,19 +1,3 @@
-<?php
-
-require ('../repository/Repository.php');
-
-$id = $_GET['id'];
-
-if ((isset($id)) == false) {
-    header('Location:listado.php');
-}
-
-$repository = new Repository();
-
-$repository->DeleteProduct($id);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,14 +11,10 @@ $repository->DeleteProduct($id);
 </head>
 <body class="text-center">
     <header>
-        <h1 class="mt-5">Producto Borrado<h1>
+        <h1 class="mt-5">El formulario no ha podido ser enviado porque contiene errores.<h1>
     </header>
     <section class="mt-5">
-        <?php echo "El producto con código " . $id . " ha sido borrado correctamente."; ?>
-    </section>
-    <section class="mt-5">
-        <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
+        <button type="button" onclick="window.location.href='crear.php'" class="btn btn-outline-warning">Volver</button>
     </section>
 </body>
 </html>
-

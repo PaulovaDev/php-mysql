@@ -1,10 +1,9 @@
 <?php
 
-require ('../Query.php');
+require ('../repository/Repository.php');
 
-$fetch = new Query();
-$families = $fetch->FetchAllFromFamily();
-
+$repository = new Repository();
+$fetchFamilies = $repository->FetchAllFromFamily();
 
 ?>
 
@@ -23,34 +22,46 @@ $families = $fetch->FetchAllFromFamily();
 <body>
     
     <header>
-        <h1 class="text-center">Crear producto</h1>
+        <h1 class="text-center mt-5">Crear producto</h1>
     </header>
 
-    <form class="mx-auto" style="width: 900px;">
+    <form class="mx-auto" style="width: 800px;" action="../logic/crearLogica.php" method="POST">
         <div class="mt-5 mb-3">
             <label for="name">Nombre</label>
-            <input type="text" name="name">
+            <input type="text" name="nombre" placeholder="Nombre" class="ml-3">
 
             <label for="short_name" class="ml-5">Nombre corto</label>
-            <input type="text" name="short_name">
+            <input type="text" name="nombre_corto" placeholder="Nombre corto">
         </div>
+
         <div class="mb-3">
             <label for="price">Precio (€)</label>
-            <input type="float" name="price">
+            <input type="float" name="pvp" placeholder="00.00 €" class="ml-2">
 
             <label for="family" class="ml-5">Familia</label>
-            <select name="family" id="family">
-                <?php foreach ($families as $family): ?>
+            <select name="familia" id="family" class="ml-2">
+                <?php foreach ($fetchFamilies as $family): ?>
                     <option value="<?php echo $family['cod'] ?>;">
                         <?php echo $family['nombre']; ?>
                     </option>
                 <?php endforeach; ?>
             </select>
         </div>
+
         <div class="mb-3">
-            <label for="description">Descripción</label>
-            <textarea name="description" rows="10" cols="40"></textarea>
+            <label for="description">Descripción</label> <br>
+            <textarea name="descripcion" rows="5" cols="80"></textarea>
+        </div>
+
+        <div class="mt-3 text-center">
+            <input type="submit" class="btn btn-outline-success mr-5" value="Crear"></input>
+
+            <input type="reset" class="btn btn-outline-danger mr-5" value="Limpiar"></input>
+
+            <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
         </div>
     </form>
+
+
 </body>
 </html>

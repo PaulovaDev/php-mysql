@@ -1,19 +1,3 @@
-<?php
-
-require ('../repository/Repository.php');
-
-$id = $_GET['id'];
-
-if ((isset($id)) == false) {
-    header('Location:listado.php');
-}
-
-$repository = new Repository();
-
-$repository->DeleteProduct($id);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,18 +7,14 @@ $repository->DeleteProduct($id);
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <title>Borrar Producto</title>
+    <title>Actualizar Producto</title>
 </head>
 <body class="text-center">
     <header>
-        <h1 class="mt-5">Producto Borrado<h1>
+        <h1 class="mt-5">No se ha podido actualizar el producto.<h1>
     </header>
-    <section class="mt-5">
-        <?php echo "El producto con código " . $id . " ha sido borrado correctamente."; ?>
-    </section>
     <section class="mt-5">
         <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
     </section>
 </body>
 </html>
-
