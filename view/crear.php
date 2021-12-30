@@ -25,7 +25,7 @@ $fetchFamilies = $repository->FetchAllFromFamily();
         <h1 class="text-center mt-5">Crear producto</h1>
     </header>
 
-    <form class="mx-auto" style="width: 800px;" action="crearLogica.php" method="POST">
+    <form class="mx-auto" style="width: 800px;" action="../logic/crearLogica.php" method="POST">
         <div class="mt-5 mb-3">
             <label for="name">Nombre</label>
             <input type="text" name="nombre" placeholder="Nombre" class="ml-3">
@@ -36,7 +36,7 @@ $fetchFamilies = $repository->FetchAllFromFamily();
 
         <div class="mb-3">
             <label for="price">Precio (€)</label>
-            <input type="float" name="pvp" placeholder="Precio (€)" class="ml-2">
+            <input type="float" name="pvp" placeholder="00.00 €" class="ml-2">
 
             <label for="family" class="ml-5">Familia</label>
             <select name="familia" id="family" class="ml-2">

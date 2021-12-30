@@ -38,9 +38,9 @@ foreach ($products as $product) {
         <h1 class="text-center">Actualizar producto</h1>
     </header>
 
-    <form class="mx-auto" style="width: 800px;" action="actualizarLogica.php" method="POST">
+    <form class="mx-auto" style="width: 800px;" action="../logic/actualizarLogica.php" method="POST">
 
-        <input type='hidden' name='id' value='<?php $id=$_GET['id']; ?>'>
+        <input type='hidden' name='id' value='<?php echo $id=$_GET['id']; ?>'>
     
         <div class="mt-5 mb-3">
             <label for="name">Nombre</label>
@@ -52,12 +52,12 @@ foreach ($products as $product) {
         
         <div class="mb-3">
             <label for="price">Precio (€)</label>
-            <input type="float" name="pvp" placeholder="Precio (€)" class="ml-2" value="<?php echo $product['pvp'] ?>">
+            <input type="float" name="pvp" placeholder="00.00 €" class="ml-2" value="<?php echo $product['pvp'] ?>">
 
             <label for="family" class="ml-5">Familia</label>
             <select name="familia" id="family" class="ml-2">
                 <?php foreach ($fetchFamilies as $family): ?>
-                    <option value="<?php echo $family['cod'] ?>;"
+                    <option value="<?php echo $family['cod'] ?>"
                         <?php if ($family['cod'] === $product['familia']):?> selected <?php endif; ?>>
                         <?php echo $family['nombre']; ?>
                     </option>
@@ -71,7 +71,7 @@ foreach ($products as $product) {
         </div>
 
         <div class="mb-3 text-center">
-            <input type="submit" onclick="window.location.href='actualizarLogica.php?id=<?php echo $result['id']; ?>'" class="btn btn-outline-success mr-5" value="Modificar"></input>
+            <input type="submit" onclick="window.location.href='actualizarLogica.php?id=<?php echo $result['id']; ?>'" class="btn btn-outline-success mr-5" name="Modificar" value="Modificar"></input>
 
             <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
         </div>

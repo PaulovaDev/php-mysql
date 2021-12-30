@@ -49,7 +49,7 @@ foreach ($products as $product) {
     </section>
 
     <section class="mt-5 text-center">
-        <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
+        <button type="button" onclick="window.location.href='listado.php'" class=" mb-5 btn btn-outline-warning">Volver</button>
     </section>
 </body>
 </html>

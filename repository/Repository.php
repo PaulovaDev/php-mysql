@@ -54,7 +54,7 @@ class Repository
         
         try {
             $products = $stmt->execute([
-                ':name' => $name,
+                ':nombre' => $name,
                 ':nombre_corto' => $shortName,
                 ':descripcion' => $description,
                 ':pvp' => $price,
