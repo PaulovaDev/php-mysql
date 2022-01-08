@@ -10,11 +10,7 @@ if ((isset($id)) == false) {
 
 $repository = new Repository();
 
-$products = $repository->FetchDataFromProduct($id);
-
-foreach ($products as $product) {
-    $product;
-}
+$product = $repository->FetchDataFromProduct($id);
 
 ?>
 
@@ -41,8 +37,9 @@ foreach ($products as $product) {
         </div>
         <div class="mt-3">
             <p class="text-center font-weight-bold"> Código: <?php echo $product['id']; ?> </p>
-            <p> Nombre corto: <?php echo $product['nombre']; ?> </p>
-            <p> Código Familia: <?php echo $product['nombre_corto']; ?> </p>
+            <p> Nombre: <?php echo $product['nombre']; ?> </p>
+            <p> Nombre corto: <?php echo $product['nombre_corto']; ?> </p>
+            <p> Código Familia: <?php echo $product['familia']; ?> </p>
             <p> PVP(€): <?php echo $product['pvp']; ?> </p>
             <p> Descripción: <?php echo $product['descripcion']; ?> </p>
         </div>

@@ -14,14 +14,13 @@ class Repository
         
         try {
             $stmt->execute([':id' => $id]); 
-            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
-            $error = true;
-            $mensaje = $ex->getMessage();
             $conn = null;
+            echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
         }
 
-        return $products;
+        return $product;
     }
 
     public function FetchIdAndNameFromProduct()
@@ -36,9 +35,8 @@ class Repository
             $stmt->execute(); 
             $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
-            $error = true;
-            $mensaje = $ex->getMessage();
             $conn = null;
+            echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
         }
 
         return $products;
@@ -62,9 +60,8 @@ class Repository
                 ':id' => $id
             ]);
         } catch (PDOException $ex) {
-            $error = true;
-            $mensaje = $ex->getMessage();
             $conn = null;
+            echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
         }
 
         return $products;
@@ -82,9 +79,8 @@ class Repository
             $stmt->execute(); 
             $families = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
-            $error = true;
-            $mensaje = $ex->getMessage();
             $conn = null;
+            echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
         }
 
         return $families;
@@ -108,12 +104,11 @@ class Repository
                 ':familia'=>$family
             ]);
         } catch (PDOException $ex) {
-            $error = true;
-            $mensaje = $ex->getMessage();
             $conn = null;
+            echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
         }
         
-            return $products;
+        return $products;
     }
 
     public function DeleteProduct(int $id)
@@ -125,9 +120,8 @@ class Repository
         try {
             $stmt->execute([':id' => $id]); 
         } catch (PDOException $ex) {
-            $error = true;
-            $mensaje = $ex->getMessage();
             $conn = null;
+            echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
         }
     }
 }
