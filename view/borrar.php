@@ -38,7 +38,7 @@ if ((isset($id)) === true) {
         <h1 class="mt-5">Borrar Producto<h1>
     </header>
 
-<?php if ($error === null || $error): ?>
+<?php if ($error): ?>
     <section class="mt-5">
         <h2 class="text-center mt-5"> Lo sentimos, no se ha podido borrar el producto. <h2>
     </section>
