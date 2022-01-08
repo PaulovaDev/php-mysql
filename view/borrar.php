@@ -3,14 +3,22 @@
 require ('../repository/Repository.php');
 
 $id = $_GET['id'];
+$error = false;
 
-if ((isset($id)) == false) {
-    header('Location:listado.php');
+if ((isset($id)) === true) {
+
+    try {
+        $repository = new Repository();
+        $repository->DeleteProduct($id);
+
+    } catch (TypeError) {
+        $error = true;
+    }
+
+} else {
+    // header('Location:listado.php');
+    $error = true;
 }
-
-$repository = new Repository();
-
-$repository->DeleteProduct($id);
 
 ?>
 
@@ -27,14 +35,26 @@ $repository->DeleteProduct($id);
 </head>
 <body class="text-center">
     <header>
-        <h1 class="mt-5">Producto Borrado<h1>
+        <h1 class="mt-5">Borrar Producto<h1>
     </header>
+
+<?php if ($error === null || $error): ?>
+    <section class="mt-5">
+        <h2 class="text-center mt-5"> Lo sentimos, no se ha podido borrar el producto. <h2>
+    </section>
+    <section class="mt-5">
+        <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
+    </section>
+
+<?php else: ?>
     <section class="mt-5">
         <?php echo "El producto con código " . $id . " ha sido borrado correctamente."; ?>
     </section>
     <section class="mt-5">
         <button type="button" onclick="window.location.href='listado.php'" class="btn btn-outline-warning">Volver</button>
     </section>
+<?php endif; ?>
+
 </body>
 </html>
 

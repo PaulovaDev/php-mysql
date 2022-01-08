@@ -10,11 +10,7 @@ if ((isset($id)) == false) {
 
 $repository = new Repository();
 
-$products = $repository->FetchDataFromProduct($id);
-
-foreach ($products as $product) {
-    $product;
-}
+$product = $repository->FetchDataFromProduct($id);
 
 ?>
 

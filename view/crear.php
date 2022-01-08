@@ -2,10 +2,34 @@
 
 require ('../repository/Repository.php');
 
+$error = false;
+
 $repository = new Repository();
 $fetchFamilies = $repository->FetchAllFromFamily();
 
-?>
+if (isset($_POST["Create"])) {
+
+    try {
+        
+        if (is_string($_POST["nombre"]) && is_string($_POST["nombre_corto"]) && is_string($_POST["descripcion"]) && is_numeric($_POST["pvp"]) && is_string($_POST["familia"])) {
+            $name = $_POST["nombre"];
+            $shortName = $_POST["nombre_corto"];
+            $description = $_POST["descripcion"];
+            $price = $_POST["pvp"];
+            $family = $_POST["familia"];
+            
+            $create = $repository->InsertProduct($name, $shortName, $description, $price, $family);
+
+            header("Location: ../view/listado.php");
+
+        } else {
+            $error = true;
+        }
+
+    } catch (PDOException $ex) {
+        $error = true; 
+    }
+} ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,12 +44,13 @@ $fetchFamilies = $repository->FetchAllFromFamily();
     <title>Crear producto</title>
 </head>
 <body>
-    
     <header>
         <h1 class="text-center mt-5">Crear producto</h1>
     </header>
 
-    <form class="mx-auto" style="width: 800px;" action="../logic/crearLogica.php" method="POST">
+<?php if ($error != true): ?>
+
+    <form name="create" class="mx-auto" style="width: 800px;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         <div class="mt-5 mb-3">
             <label for="name">Nombre</label>
             <input type="text" name="nombre" placeholder="Nombre" class="ml-3">
@@ -54,7 +79,8 @@ $fetchFamilies = $repository->FetchAllFromFamily();
         </div>
 
         <div class="mt-3 text-center">
-            <input type="submit" class="btn btn-outline-success mr-5" value="Crear"></input>
+
+            <input type="submit" class="btn btn-outline-success mr-5" value="Crear" name="Create"></input>
 
             <input type="reset" class="btn btn-outline-danger mr-5" value="Limpiar"></input>
 
@@ -62,6 +88,16 @@ $fetchFamilies = $repository->FetchAllFromFamily();
         </div>
     </form>
 
+<?php else: ?>
+
+    <section class="mb-5 text-center">
+        <h2> Lo sentimos, no se ha podido crear el producto. <h2>
+    </section>
+    <section class="mb-5 text-center">
+        <button type="button" onclick="window.location.href='crear.php'" class="btn btn-outline-warning">Volver</button>
+    </section>
+
+<?php endif ?>
 
 </body>
 </html>
