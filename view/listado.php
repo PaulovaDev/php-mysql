@@ -49,7 +49,7 @@ $results = $fetch->FetchIdAndNameFromProduct();
                         <td> <?= $result['id']; ?> </td>
                         <td> <?= $result['nombre']; ?> </td>
                         <td>
-                            <button type="button" onclick="window.location.href='actualizar.php?id=<?php echo $result['id']; ?>'" class="btn btn-outline-warning">Actualizar</button>
+                            <button type="button" onclick="window.location.href='update.php?id=<?php echo $result['id']; ?>'" class="btn btn-outline-warning">Actualizar</button>
                             <button type="button" onclick="window.location.href='borrar.php?id=<?php echo $result['id']; ?>'" class="btn btn-outline-danger">Borrar</button>
                         </td>
                     </tr>
