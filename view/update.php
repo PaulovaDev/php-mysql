@@ -2,17 +2,17 @@
 
 require ('../repository/Repository.php');
 
-$id = null;
 $error = false;
 
+// Comprobamos que cuando se carga la página el código del producto se ha pasado por GET: $_GET['id'].
+// Se recuperan los datos de la base de datos y se muestran.
 if (isset($_GET['id'])) {
     
     $id = $_GET['id'];
 
-    // Si la variable $id está definida y no es null: 1. se instancia un objeto de tipo Repository 2. se recuperan los datos de la base de datos y 3. se muestra el formulario para modificar el producto.
-
     $repository = new Repository();
 
+    // Se ejecuta el SELECT.
     try {
         $fetchFamilies = $repository->FetchAllFromFamily();
         $product = $repository->FetchDataFromProduct($id);
@@ -21,13 +21,15 @@ if (isset($_GET['id'])) {
         $error = true;
     }
 
+// Cuando hacemos clic en el botón Modificar (submit), el código del producto se pasa por POST.
+// Comprobamos que tras el submit el código del producto se ha pasado por POST: $_POST['id'].
 } elseif (isset($_POST['id'])) {
-
     
     $id = $_POST['id'];
 
     $repository = new Repository();
 
+    // Se ejecuta el UPDATE.
     try {
 
         if (is_string($_POST["nombre"]) && is_string($_POST["nombre_corto"]) && is_string($_POST["descripcion"]) && is_numeric($_POST["pvp"]) && is_string($_POST["familia"]) && is_numeric($id)) {
@@ -50,7 +52,12 @@ if (isset($_GET['id'])) {
 
     }    
 
-} ?> 
+// En caso de que la variable $id no exista (es decir, no se ha recibido ni por GET ni por POST, redireccionamos a listado.php).
+} else {
+    header("Location: ../view/listado.php");
+
+}
+ ?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +77,7 @@ if (isset($_GET['id'])) {
         <h1 class="text-center mt-5">Actualizar producto</h1>
     </header>
 
-    <?php if ($id === null || $error): ?>
+    <?php if ($error): ?>
         <!-- si hay un error -->
         <section class="mb-5">
             <h2 class="text-center mt-5"> Lo sentimos, no se ha podido actualizar el producto. <h2>

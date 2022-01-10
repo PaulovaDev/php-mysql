@@ -4,7 +4,7 @@ require ('../repository/Repository.php');
 
 $id = $_GET['id'];
 
-if ((isset($id)) == false) {
+if ((isset($id)) === false) {
     header('Location:listado.php');
 }
 

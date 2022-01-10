@@ -16,7 +16,7 @@ if ((isset($id)) === true) {
     }
 
 } else {
-    // header('Location:listado.php');
+
     $error = true;
 }
 

@@ -6,16 +6,22 @@ class Repository
 {
     public function FetchDataFromProduct(int $id)
     {
+        // Se declara la variable $conn como global para que pueda ser utilizada en la propia función:
         global $conn;
 
+        // Se utiliza el tilizar el método prepare de la clase PDO, que devolverá un objeto de la clase PDOStatement.
         $stmt = $conn->prepare(
             "SELECT id, nombre, nombre_corto, descripcion, pvp, familia FROM productos WHERE id=:id"
         );
         
         try {
+            // Una vez que se ha preparado la consulta (líneas 13, 14 y 15 del código), la ejecutamos utilizando el método execute.
             $stmt->execute([':id' => $id]); 
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
         } catch (PDOException $ex) {
+            // Si hubiera un error en la ejecución del código anterior,
+            // se cerraría la conexión y se mostraría el mesaje de error.
             $conn = null;
             echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
         }
@@ -34,6 +40,7 @@ class Repository
         try {
             $stmt->execute(); 
             $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         } catch (PDOException $ex) {
             $conn = null;
             echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
@@ -78,6 +85,7 @@ class Repository
         try {
             $stmt->execute(); 
             $families = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         } catch (PDOException $ex) {
             $conn = null;
             echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
@@ -119,6 +127,7 @@ class Repository
         
         try {
             $stmt->execute([':id' => $id]); 
+            
         } catch (PDOException $ex) {
             $conn = null;
             echo "Lo sentimos, ha habido un error de conexión con la base de datos.";
